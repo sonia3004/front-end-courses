@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Food Product</title>
+    <link rel="stylesheet" href="productCard.css"> 
+</head>
+<body>
+    <main>
+        <article class="product-card">
+            <figure class="product-image-container">
+                <img src="petfood1.jpg" alt="Image of Topaze's organic pet food" class="product-main-image" id="mainImage">
+                <div class="product-thumbnails">
+                    <img src="petfood2.jpg" alt="Thumbnail 1" class="thumbnail" onclick="changeImage('petfood2.jpg')">
+                    <img src="petfood1.jpg" alt="Thumbnail 2" class="thumbnail" onclick="changeImage('petfood1.jpg')">
+                    <img src="petfood3.jpg" alt="Thumbnail 3" class="thumbnail" onclick="changeImage('petfood3.jpg')">
+                    <img src="petfood4.jpeg" alt="Thumbnail 4" class="thumbnail" onclick="changeImage('petfood4.jpeg')">
+                </div>
+                <figcaption>Organic food, without additives</figcaption>
+            </figure>
+
+            <aside class="product-details">
+                <header class="product-header">
+                    <h2 class="product-title">Topaze's food</h2>
+                </header>
+                <section class="product-description-section">
+                    <p class="product-description">The best choice for your pet ! <br><br>2 formats option</p>
+                    <div class="product-format">
+                        <button class="format-button selected" onclick="updatePrice(20, this)">5 kg - 20 €</button>
+                        <button class="format-button" onclick="updatePrice(45, this)">15 kg - 45 €</button>
+                        <p class="product-price" id="product-price">Price: 20 €</p>
+                    </div>
+                </section>
+                
+                <aside class="product-aside">
+                    <ul>
+                        <li>Ingredients: Organic chicken, rice and vegetables</li>
+                        <li>Brand : Topaze</li>
+                        <li class="stock-status">In stock</li>
+                    </ul>
+                </aside>
+                
+                <footer class="product-footer">
+                    <label for="quantity" class="quantity-label">Quantity:</label>
+                    <select id="quantity" name="quantity" class="quantity-select" onchange="updateTotalPrice()">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <button class="add-to-cart">Add to cart</button>
+                </footer>
+                
+            </aside>
+        </article>
+    </main>
+    
+    <script>
+        function changeImage(imageSrc) {
+            document.getElementById('mainImage').src = imageSrc;
+        }
+    let unitPrice = 20; 
+
+    function updatePrice(price, button) {
+     
+        unitPrice = price;
+        
+   
+        const buttons = document.querySelectorAll('.format-button');
+        buttons.forEach(btn => btn.classList.remove('selected'));
+        
+    
+        button.classList.add('selected');
+
+        updateTotalPrice();
+    }
+
+    function updateTotalPrice() {
+        const quantity = document.getElementById('quantity').value;
+        const totalPrice = unitPrice * quantity;
+        document.getElementById('product-price').innerText = 'Price: ' + totalPrice + ' €';
+    }
+    </script>
+</body>
+</html>
